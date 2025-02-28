@@ -1,0 +1,23 @@
+datasource postgresql {
+  url      = env("PG_DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+}
+
+model AdminUser {
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime            @default(now())
+  login             String              @unique
+  password          Bytes
+  token             String?             @unique
+}
+
+model File {
+  id                String               @id
+  src               String
+  name              String?
+  fileSize          Int
+}
